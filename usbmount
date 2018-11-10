@@ -78,11 +78,11 @@ umask 022
 if [ "$1" = add ]; then
 
     # Acquire lock.
-    log debug "trying to acquire lock /var/run/usbmount/.mount.lock"
-    lockfile-create --retry 3 /var/run/usbmount/.mount || \
-	{ log err "cannot acquire lock /var/run/usbmount/.mount.lock"; exit 1; }
-    trap '( lockfile-remove /var/run/usbmount/.mount )' 0
-    log debug "acquired lock /var/run/usbmount/.mount.lock"
+    # log debug "trying to acquire lock /var/run/usbmount/.mount.lock"
+    # lockfile-create --retry 3 /var/run/usbmount/.mount || \
+	# { log err "cannot acquire lock /var/run/usbmount/.mount.lock"; exit 1; }
+    # trap '( lockfile-remove /var/run/usbmount/.mount )' 0
+    # log debug "acquired lock /var/run/usbmount/.mount.lock"
 
     # Query udev for the expected device information (as we are now running in
     # a service's context and the env variables have been lost)
@@ -96,10 +96,10 @@ if [ "$1" = add ]; then
     UUID=$(echo "$DEVINFO"   | sed 's/.*[[:blank:]]UUID="\([^"]*\)".*/\1/g; s/[[:blank:]]*//g;')
     USAGE=$(echo "$DEVINFO"  | sed 's/.*[[:blank:]]USAGE="\([^"]*\)".*/\1/g; s/[[:blank:]]*//g;')
 
-    if ! echo $USAGE | egrep -q "(filesystem|disklabel)"; then
-	log info "$DEVNAME does not contain a filesystem or disklabel"
-	exit 0
-    fi
+    # if ! echo $USAGE | egrep -q "(filesystem|disklabel)"; then
+	# log info "$DEVNAME does not contain a filesystem or disklabel"
+	# exit 0
+    # fi
 
     # Try to use specifications in /etc/fstab first.
     if egrep -q "^[[:blank:]]*$DEVNAME" /etc/fstab; then

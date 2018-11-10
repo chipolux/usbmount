@@ -1,4 +1,8 @@
-# USBmount
+# USBmount For Yocto
+
+***See Original Here: [rbrito/usbmount](https://github.com/rbrito/usbmount)***
+This is just a tiny set of tweaks to get it working on a small yocto linux
+system I've been working on.
 
 The USBmount package automatically mounts USB mass storage devices (e.g.,
 USB pen drives or HDs in USB enclosures) when they are plugged in.  The
